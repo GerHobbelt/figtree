@@ -27,7 +27,7 @@
 //			for use in load constructor.
 //		Added annClose() to eliminate KD_TRIVIAL memory leak.
 //----------------------------------------------------------------------
-
+#include <stdio.h>
 #include "kd_tree.h"					// kd-tree declarations
 #include "kd_split.h"					// kd-tree splitting rules
 #include "kd_util.h"					// kd-tree utilities
@@ -142,7 +142,7 @@ void ANNkdStats::merge(const ANNkdStats &st)	// merge stats from child
 //	Update statistics for nodes
 //----------------------------------------------------------------------
 
-const double ANN_AR_TOOBIG = 1000;				// too big an aspect ratio
+const float ANN_AR_TOOBIG = 1000;				// too big an aspect ratio
 
 void ANNkd_leaf::getStats(						// get subtree statistics
 	int					dim,					// dimension of space
@@ -152,7 +152,7 @@ void ANNkd_leaf::getStats(						// get subtree statistics
 	st.reset();
 	st.n_lf = 1;								// count this leaf
 	if (this == KD_TRIVIAL) st.n_tl = 1;		// count trivial leaf
-	double ar = annAspectRatio(dim, bnd_box);	// aspect ratio of leaf
+	float ar = annAspectRatio(dim, bnd_box);	// aspect ratio of leaf
 												// incr sum (ignore outliers)
 	st.sum_ar += float(ar < ANN_AR_TOOBIG ? ar : ANN_AR_TOOBIG);
 }
@@ -333,6 +333,7 @@ ANNkd_ptr rkd_tree(				// recursive construction of kd-tree
 		ANNkd_node *lo, *hi;			// low and high children
 
 										// invoke splitting procedure
+		std::cout << "rkd_tree\n";
 		(*splitter)(pa, pidx, bnd_box, n, dim, cd, cv, n_lo);
 
 		ANNcoord lv = bnd_box.lo[cd];	// save bounds for cutting dimension
@@ -381,7 +382,6 @@ ANNkd_tree::ANNkd_tree(					// construct from point array
 										// copy to tree structure
 	bnd_box_lo = annCopyPt(dd, bnd_box.lo);
 	bnd_box_hi = annCopyPt(dd, bnd_box.hi);
-
 	switch (split) {					// build by rule
 	case ANN_KD_STD:					// standard kd-splitting rule
 		root = rkd_tree(pa, pidx, n, dd, bs, bnd_box, kd_split);
