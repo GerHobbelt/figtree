@@ -333,7 +333,6 @@ ANNkd_ptr rkd_tree(				// recursive construction of kd-tree
 		ANNkd_node *lo, *hi;			// low and high children
 
 										// invoke splitting procedure
-		std::cout << "rkd_tree\n";
 		(*splitter)(pa, pidx, bnd_box, n, dim, cd, cv, n_lo);
 
 		ANNcoord lv = bnd_box.lo[cd];	// save bounds for cutting dimension
