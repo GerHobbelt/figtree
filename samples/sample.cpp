@@ -42,7 +42,8 @@
   // The locations of figtree.dll and ANN.dll must either be in the PATH
   // environment variable, or in the same location from which sample.exe is
   // is executed.
-  #pragma comment(lib,"../lib/figtree.lib")
+  
+  //#pragma comment(lib,"../lib/figtree.lib")
 #endif
 
 // This file only shows examples of how the figtree() function can be used.
