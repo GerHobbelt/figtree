@@ -55,7 +55,7 @@
 // the parameter selection and clustering steps do not have to be performed each time
 // the gauss transform needs to be evaluated.
 
-int main()
+int main(void)
 {
   // The dimensionality of each sample vector.
   int d = 7;

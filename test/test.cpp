@@ -52,7 +52,7 @@
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #endif
 
-int main()
+int main(void)
 {
   int ds[] = {1,2,3,4,5,6};
   double hs[] = {.01,.02,.04,.08,.16,.32,.64};
